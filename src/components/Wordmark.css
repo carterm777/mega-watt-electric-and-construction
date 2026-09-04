@@ -1,0 +1,61 @@
+.wm {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.wm__mark {
+  display: block;
+  flex: none;
+}
+
+.wm__plate {
+  fill: var(--surface-void);
+}
+
+.wm__plane {
+  fill: var(--surface-accent);
+}
+
+.wm__glyph {
+  fill: var(--ink-on-dark);
+}
+
+.wm__type {
+  display: grid;
+  gap: 2px;
+  line-height: 1;
+}
+
+.wm__name {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: var(--w-bold);
+  letter-spacing: -0.035em;
+  color: var(--ink-on-dark);
+}
+
+.wm__sub {
+  font-family: var(--font-display);
+  font-size: 0.5625rem;
+  font-weight: var(--w-medium);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-on-dark-muted);
+}
+
+.wm[data-variant='accent'] .wm__plate {
+  fill: var(--surface-ink);
+}
+
+.wm[data-variant='accent'] .wm__plane {
+  fill: var(--surface-accent);
+}
+
+.wm[data-variant='accent'] .wm__name {
+  color: var(--ink-on-accent);
+}
+
+.wm[data-variant='accent'] .wm__sub {
+  color: var(--ink-on-accent-muted);
+}

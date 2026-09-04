@@ -1,0 +1,108 @@
+/* ==========================================================================
+   Trust Badges — Certification Badge Wall (layouts/credibility)
+                  + Badge or Seal Bold Treatment (visual-styles/credibility)
+   The one place the accent runs full-bleed as a structural plane. Four seals,
+   identical size, stroke and optical alignment; divided by ink hairlines.
+   ========================================================================== */
+
+.tb {
+  padding-block: clamp(1.75rem, 1.1rem + 2.2vw, 2.75rem);
+  border-block: var(--rule-bold) solid var(--surface-ink);
+}
+
+.tb__inner {
+  display: grid;
+  gap: var(--s-md);
+}
+
+.tb__title {
+  color: var(--ink-on-accent-muted);
+}
+
+.tb__tick {
+  background: var(--ink-on-accent);
+}
+
+.tb__wall {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--a-ink-24);
+}
+
+.tb__badge {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.35rem 1.15rem 0.35rem 0;
+  background: var(--surface-accent);
+}
+
+.tb__badge:not(:first-child) {
+  padding-left: 1.15rem;
+}
+
+.tb__seal {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 54px;
+  height: 54px;
+  background: var(--surface-ink);
+  color: var(--ink-on-dark-accent);
+  transition: transform var(--dur-mid) var(--ease-out-cubic);
+}
+
+.tb__badge:hover .tb__seal {
+  transform: translateY(-3px);
+}
+
+.tb__label {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: var(--w-bold);
+  line-height: 1.16;
+  letter-spacing: -0.022em;
+  color: var(--ink-on-accent);
+}
+
+@media (max-width: 1020px) {
+  .tb__wall {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .tb__badge {
+    padding: 0.9rem 1rem 0.9rem 0;
+  }
+  .tb__badge:nth-child(odd) {
+    padding-left: 0;
+  }
+  .tb__badge:nth-child(even) {
+    padding-left: 1rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .tb__wall {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .tb__badge,
+  .tb__badge:nth-child(even) {
+    padding: 0.75rem 0;
+  }
+  .tb__seal {
+    width: 44px;
+    height: 44px;
+  }
+  .tb__label {
+    font-size: 0.875rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tb__seal {
+    transition: none;
+  }
+  .tb__badge:hover .tb__seal {
+    transform: none;
+  }
+}

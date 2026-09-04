@@ -1,0 +1,71 @@
+/* Sticky mobile call bar — Sticky Bar Slide-In on Scroll Threshold. */
+
+.scb {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .scb {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: var(--z-callbar);
+    transform: translateY(102%);
+    transition: transform var(--dur-slow) var(--ease-out-quart);
+  }
+
+  .scb[data-show='true'] {
+    transform: none;
+  }
+
+  .scb__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1rem;
+    background: var(--surface-accent);
+    color: var(--ink-on-accent);
+    border-top: var(--rule-bold) solid var(--surface-ink);
+  }
+
+  .scb__icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 32px;
+    height: 32px;
+    background: var(--surface-ink);
+    color: var(--ink-on-dark-accent);
+  }
+
+  .scb__text {
+    display: grid;
+    gap: 1px;
+    line-height: 1.05;
+  }
+
+  .scb__kicker {
+    font-family: var(--font-display);
+    font-size: 0.5625rem;
+    font-weight: var(--w-medium);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-on-accent-muted);
+  }
+
+  .scb__number {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: var(--w-bold);
+    letter-spacing: -0.024em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scb {
+    transition: none;
+  }
+}

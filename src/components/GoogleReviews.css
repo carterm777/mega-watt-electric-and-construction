@@ -1,0 +1,243 @@
+/* ==========================================================================
+   Google Reviews — Stat Counter and Testimonial Combo (layouts/social-proof)
+                    + Star Rating Bold Color Accent (visual-styles)
+   The aggregate is a hard ink block set into the light field; the five cards
+   sit against it as a divided plate rather than floating rounded cards.
+   ========================================================================== */
+
+.gr {
+  /* Room for the hero console dropping through the field boundary. */
+  padding-top: clamp(3.5rem, 1.4rem + 6vw, 7.5rem);
+}
+
+.gr__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
+  gap: clamp(1.5rem, 0.4rem + 3vw, 3.25rem);
+  align-items: start;
+}
+
+.gr__aggregate {
+  position: sticky;
+  top: 132px;
+  display: grid;
+  gap: var(--s-sm);
+  padding: var(--s-md);
+  background: var(--surface-ink);
+  color: var(--ink-on-dark);
+  border-top: var(--plane) solid var(--surface-accent);
+}
+
+.gr__eyebrow {
+  color: var(--ink-on-dark-accent);
+}
+
+.gr__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2.05rem);
+  line-height: 1.02;
+  letter-spacing: -0.034em;
+  font-weight: var(--w-bold);
+  text-wrap: balance;
+}
+
+.gr__score {
+  display: flex;
+  align-items: center;
+  gap: var(--s-sm);
+  padding-block: var(--s-sm);
+  border-block: var(--rule) solid var(--hairline-dark);
+}
+
+.gr__score-figure {
+  font-family: var(--font-display);
+  font-size: clamp(3.25rem, 2.4rem + 3vw, 4.5rem);
+  line-height: 0.84;
+  letter-spacing: -0.06em;
+  font-weight: var(--w-bold);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-on-dark);
+}
+
+.gr__score-meta {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.gr__stars {
+  display: inline-flex;
+  gap: 2px;
+  color: var(--surface-accent);
+}
+
+.gr__score-line {
+  display: grid;
+  gap: 2px;
+}
+
+.gr__score-out {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: var(--w-medium);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-on-dark);
+}
+
+.gr__score-support {
+  font-size: 0.8125rem;
+  color: var(--ink-on-dark-muted);
+}
+
+.gr__source {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: var(--w-medium);
+  letter-spacing: 0.02em;
+  color: var(--ink-on-dark-muted);
+}
+
+.gr__mark {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  background: var(--c-white);
+}
+
+.gr__ask {
+  display: grid;
+  gap: 0.5rem;
+  padding-top: var(--s-xs);
+  border-top: var(--rule) solid var(--hairline-dark);
+}
+
+.gr__ask-lead {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: var(--w-bold);
+  letter-spacing: -0.022em;
+  color: var(--ink-on-dark);
+}
+
+.gr__disclaimer {
+  display: flex;
+  gap: 0.45rem;
+  padding-top: var(--s-xs);
+  border-top: var(--rule) solid var(--hairline-dark);
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  color: var(--ink-on-dark-subtle);
+}
+
+.gr__disclaimer svg {
+  flex: none;
+  margin-top: 1px;
+}
+
+/* --- cards --------------------------------------------------------- */
+
+.gr__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--hairline-light);
+  border: var(--rule) solid var(--hairline-light);
+}
+
+.gr__card {
+  display: grid;
+  align-content: start;
+  gap: var(--s-xs);
+  padding: var(--s-md);
+  background: var(--surface-light-raised);
+  transition:
+    background-color var(--dur-mid) var(--ease-out-cubic),
+    box-shadow var(--dur-mid) var(--ease-out-cubic);
+}
+
+.gr__card:hover {
+  background: var(--surface-light);
+  box-shadow: inset 0 0 0 var(--rule-bold) var(--surface-accent);
+}
+
+.gr__quote {
+  font-size: 0.96875rem;
+  line-height: 1.55;
+  color: var(--ink-on-light);
+}
+
+.gr__who {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding-top: var(--s-xs);
+  border-top: var(--rule) solid var(--hairline-light);
+}
+
+.gr__initial {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  background: var(--surface-ink);
+  color: var(--ink-on-dark);
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: var(--w-bold);
+}
+
+.gr__name {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: var(--w-bold);
+  letter-spacing: -0.015em;
+}
+
+.gr__via {
+  margin-left: auto;
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-on-light-muted);
+}
+
+/* The fifth card takes the full width of the closing row so the plate ends
+   square rather than leaving a hole in the grid. */
+.gr__grid .gr__card:last-child {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 1080px) {
+  .gr__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .gr__aggregate {
+    position: static;
+  }
+  .gr__score {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 720px) {
+  .gr__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .gr__card {
+    padding: var(--s-sm);
+  }
+  .gr__aggregate {
+    padding: var(--s-sm);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gr__card {
+    transition: none;
+  }
+}

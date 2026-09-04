@@ -1,0 +1,127 @@
+/* ==========================================================================
+   Why Us — Alternating Benefit List (layouts/value-proposition)
+            + Filled Icon Badges (visual-styles/value-proposition)
+   Each row is a hard two-plane split: a duotone plate against a flat ink or
+   light field, sides flipping row to row. No cards, no rounding, no shadow.
+   ========================================================================== */
+
+.why__eyebrow {
+  color: var(--ink-on-light-accent);
+}
+
+.why__list {
+  display: grid;
+  gap: 1px;
+  background: var(--hairline-light);
+  border-block: var(--rule) solid var(--hairline-light);
+}
+
+.why__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: stretch;
+  background: var(--surface-light);
+}
+
+.why__media {
+  position: relative;
+  min-height: 268px;
+}
+
+.why__plate {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+/* The accent plane runs down the inside edge of every plate — a structural
+   marker, not an outline. It flips with the row. */
+.why__index {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: var(--plane);
+  background: var(--surface-accent);
+}
+
+.why__row[data-flip='1'] .why__media {
+  order: 2;
+}
+
+.why__row[data-flip='1'] .why__index {
+  right: auto;
+  left: 0;
+}
+
+.why__body {
+  display: grid;
+  align-content: center;
+  gap: 0.7rem;
+  padding: clamp(1.5rem, 0.8rem + 2.2vw, 3rem);
+}
+
+.why__icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  background: var(--surface-ink);
+  color: var(--ink-on-dark-accent);
+  transition:
+    background-color var(--dur-mid) var(--ease-out-cubic),
+    color var(--dur-mid) var(--ease-out-cubic);
+}
+
+.why__row:hover .why__icon {
+  background: var(--surface-accent);
+  color: var(--ink-on-accent);
+}
+
+.why__title {
+  font-family: var(--font-display);
+  font-size: var(--t-heading);
+  line-height: var(--t-heading-lh);
+  letter-spacing: var(--t-heading-ls);
+  font-weight: var(--w-bold);
+  max-width: 20ch;
+  text-wrap: balance;
+}
+
+.why__copy {
+  font-size: var(--t-body);
+  line-height: 1.6;
+  color: var(--ink-on-light-muted);
+  max-width: 46ch;
+}
+
+@media (max-width: 860px) {
+  .why__row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .why__media {
+    min-height: 210px;
+    order: 0;
+  }
+  .why__row[data-flip='1'] .why__media {
+    order: 0;
+  }
+  .why__index,
+  .why__row[data-flip='1'] .why__index {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: var(--plane);
+  }
+  .why__body {
+    padding: var(--s-md) var(--s-sm) var(--s-lg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .why__icon {
+    transition: none;
+  }
+}

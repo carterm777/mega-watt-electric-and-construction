@@ -1,0 +1,188 @@
+/* ==========================================================================
+   Footer — Mega Footer (layouts/footer) + Bold Color-Block Footer
+   The brand column sits on a solid accent plane while the link columns stay on
+   arctic ink: colour-blocking, not a wall of orange. The base bar closes on
+   void black so the page ends a shade darker than it began.
+   ========================================================================== */
+
+.ftr {
+  position: relative;
+  isolation: isolate;
+  background: var(--surface-ink);
+  color: var(--ink-on-dark);
+  border-top: var(--plane) solid var(--surface-accent);
+}
+
+.ftr__grid-bg {
+  z-index: 0;
+}
+
+.ftr__inner {
+  position: relative;
+  z-index: 1;
+  padding-block: clamp(2.25rem, 1.2rem + 3.2vw, 4rem);
+}
+
+.ftr__cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--hairline-dark);
+}
+
+.ftr__col {
+  display: grid;
+  align-content: start;
+  gap: var(--s-xs);
+  padding: var(--s-md) var(--s-sm);
+  background: var(--surface-ink);
+}
+
+.ftr__col--brand {
+  background: var(--surface-accent);
+  color: var(--ink-on-accent);
+  padding: var(--s-md);
+}
+
+.ftr__mission {
+  font-size: 0.9375rem;
+  line-height: 1.58;
+  color: var(--ink-on-accent);
+  max-width: 44ch;
+}
+
+.ftr__socials {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.ftr__social {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  background: var(--surface-ink);
+  color: var(--ink-on-dark);
+  transition:
+    background-color var(--dur-fast) var(--ease-out-cubic),
+    transform var(--dur-fast) var(--ease-out-cubic);
+}
+
+.ftr__social:hover,
+.ftr__social:focus-visible {
+  background: var(--surface-void);
+  transform: translateY(-2px);
+}
+
+.ftr__heading {
+  font-family: var(--font-display);
+  font-size: var(--t-label);
+  font-weight: var(--w-bold);
+  letter-spacing: var(--t-label-ls);
+  text-transform: uppercase;
+  color: var(--ink-on-dark-accent);
+  padding-bottom: var(--s-2xs);
+  border-bottom: var(--rule) solid var(--hairline-dark);
+}
+
+.ftr__list {
+  display: grid;
+  gap: 0.42rem;
+}
+
+.ftr__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  color: var(--ink-on-dark-muted);
+  background-image: linear-gradient(var(--surface-accent), var(--surface-accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0 var(--rule-bold);
+  transition:
+    background-size var(--dur-mid) var(--ease-out-quart),
+    color var(--dur-fast) var(--ease-out-cubic);
+}
+
+.ftr__link:hover,
+.ftr__link:focus-visible {
+  color: var(--ink-on-dark);
+  background-size: 100% var(--rule-bold);
+}
+
+.ftr__address {
+  display: grid;
+  gap: 0.42rem;
+  font-style: normal;
+}
+
+.ftr__biz {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: var(--w-bold);
+  letter-spacing: -0.022em;
+  color: var(--ink-on-dark);
+}
+
+.ftr__line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  color: var(--ink-on-dark-muted);
+}
+
+/* --- base bar --------------------------------------------------------- */
+
+.ftr__base {
+  position: relative;
+  z-index: 1;
+  background: var(--surface-void);
+  border-top: var(--rule) solid var(--hairline-dark);
+}
+
+.ftr__base-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-xs);
+  padding-block: var(--s-sm);
+}
+
+.ftr__copy,
+.ftr__demo {
+  font-size: var(--t-micro);
+  letter-spacing: 0.04em;
+  color: var(--ink-on-dark-subtle);
+}
+
+@media (max-width: 1040px) {
+  .ftr__cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ftr__col--brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 620px) {
+  .ftr__cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ftr__col--brand {
+    grid-column: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ftr__social,
+  .ftr__link {
+    transition: none;
+  }
+  .ftr__social:hover {
+    transform: none;
+  }
+}

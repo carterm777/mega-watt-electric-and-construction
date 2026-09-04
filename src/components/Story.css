@@ -1,0 +1,137 @@
+/* ==========================================================================
+   Our Story — Values-Led Story Block (layouts/about-story)
+               + Dark Cinematic Narrative Band (visual-styles/about-story)
+   The three paragraphs ship verbatim; only the short block labels are added,
+   which is what turns a wall of prose into the values-led shape the layout
+   wants. The plate bleeds off the left edge into the page margin.
+   ========================================================================== */
+
+.story {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--section-pad-y);
+  border-top: var(--plane) solid var(--surface-accent);
+}
+
+.story__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1fr);
+  gap: clamp(1.75rem, 0.5rem + 3.4vw, 4rem);
+  align-items: start;
+}
+
+.story__media {
+  position: relative;
+  min-height: 420px;
+  /* Bleeds to the viewport edge, not just past the gutter — the plate is not
+     politely inside the container. */
+  margin-left: calc(0px - var(--gutter) - max(0px, (100vw - var(--shell)) / 2));
+  align-self: stretch;
+}
+
+.story__plate {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+/* Same structural marker the Why Us plates carry, on the inner edge. */
+.story__plane {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  width: var(--plane);
+  background: var(--surface-accent);
+}
+
+.story__copy {
+  display: grid;
+  gap: var(--s-sm);
+}
+
+.story__eyebrow {
+  color: var(--ink-on-dark-accent);
+}
+
+.story__title {
+  font-family: var(--font-display);
+  font-size: var(--t-display);
+  line-height: var(--t-display-lh);
+  letter-spacing: var(--t-display-ls);
+  font-weight: var(--w-bold);
+  color: var(--ink-on-dark);
+  max-width: 16ch;
+  text-wrap: balance;
+}
+
+.story__blocks {
+  display: grid;
+  gap: 1px;
+  margin-top: var(--s-2xs);
+  background: var(--hairline-dark);
+  border-block: var(--rule) solid var(--hairline-dark);
+}
+
+.story__block {
+  display: grid;
+  grid-template-columns: minmax(0, 150px) minmax(0, 1fr);
+  gap: var(--s-sm);
+  padding-block: var(--s-md);
+  background: var(--surface-void);
+}
+
+.story__block-label {
+  font-family: var(--font-display);
+  font-size: var(--t-label);
+  font-weight: var(--w-bold);
+  letter-spacing: var(--t-label-ls);
+  text-transform: uppercase;
+  color: var(--ink-on-dark-accent);
+  padding-top: 0.35rem;
+}
+
+.story__block-body {
+  font-size: var(--t-body);
+  line-height: 1.68;
+  color: var(--ink-on-dark-muted);
+  max-width: 60ch;
+}
+
+.story__block:first-child .story__block-body {
+  font-size: var(--t-lead);
+  line-height: 1.55;
+  color: var(--ink-on-dark);
+}
+
+@media (max-width: 940px) {
+  .story__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .story__media {
+    margin-inline: calc(var(--gutter) * -1);
+  }
+  .story__plane {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: var(--plane);
+  }
+  .story__plate {
+    position: static;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 620px) {
+  .story__block {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+  .story__block-label {
+    padding-top: 0;
+  }
+}

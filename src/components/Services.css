@@ -1,0 +1,233 @@
+/* ==========================================================================
+   Services — Service Card Grid (layouts/services)
+              + Duotone Image Treatment per Service (visual-styles/services)
+   One duotone across all six so the grid reads as a single system — including
+   the farm plate, which earns its weight through scale and a full-height accent
+   plane instead of a second treatment. It is the work the other electricians
+   turn down, so it gets a 2x2 cell rather than a sixth identical tile.
+   ========================================================================== */
+
+.svc {
+  position: relative;
+  isolation: isolate;
+}
+
+.svc__grid-bg {
+  z-index: 0;
+}
+
+.svc__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.svc__eyebrow {
+  color: var(--ink-on-dark-accent);
+}
+
+.svc__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--hairline-dark);
+  border: var(--rule) solid var(--hairline-dark);
+}
+
+.svc__card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-void);
+  transition: background-color var(--dur-mid) var(--ease-out-cubic);
+}
+
+.svc__card:hover {
+  background: var(--surface-ink-raised);
+}
+
+.svc__plate {
+  display: block;
+  aspect-ratio: 16 / 10;
+  width: 100%;
+}
+
+.svc__body {
+  display: grid;
+  align-content: start;
+  gap: 0.5rem;
+  padding: var(--s-md) var(--s-sm) var(--s-md);
+  border-top: var(--rule-bold) solid transparent;
+  transition: border-color var(--dur-mid) var(--ease-out-cubic);
+}
+
+.svc__card:hover .svc__body {
+  border-top-color: var(--surface-accent);
+}
+
+.svc__title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  line-height: 1.12;
+  letter-spacing: -0.028em;
+  font-weight: var(--w-bold);
+  color: var(--ink-on-dark);
+  text-wrap: balance;
+}
+
+.svc__copy {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ink-on-dark-muted);
+}
+
+.svc__price {
+  justify-self: start;
+  margin-top: 0.2rem;
+  padding: 0.25rem 0.55rem;
+  background: var(--surface-ink);
+  border-left: var(--rule-bold) solid var(--surface-accent);
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: var(--w-bold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-on-dark);
+}
+
+/* --- the farm plate ------------------------------------------------ */
+
+.svc__card[data-feature='true'] {
+  grid-column: span 2;
+  grid-row: span 2;
+  position: relative;
+  background: var(--surface-ink);
+}
+
+.svc__card[data-feature='true'] .svc__plate {
+  flex: 1;
+  aspect-ratio: auto;
+  min-height: 260px;
+}
+
+/* Full-height accent plane down the outer edge — the farm line's weight comes
+   from structure, not from a different photo treatment. */
+.svc__card[data-feature='true']::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: var(--plane);
+  background: var(--surface-accent);
+  z-index: 2;
+}
+
+.svc__card[data-feature='true'] .svc__body {
+  padding-left: calc(var(--s-md) + var(--plane));
+}
+
+.svc__card[data-feature='true'] .svc__body {
+  gap: 0.7rem;
+  padding: var(--s-md) var(--s-md) var(--s-lg);
+  border-top: var(--plane) solid var(--surface-accent);
+}
+
+.svc__card[data-feature='true'] .svc__title {
+  font-size: clamp(1.5rem, 1.1rem + 1.5vw, 2.25rem);
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+}
+
+.svc__card[data-feature='true'] .svc__copy {
+  max-width: 48ch;
+  font-size: var(--t-lead);
+  line-height: 1.5;
+  color: var(--ink-on-dark);
+}
+
+.svc__feature-label {
+  font-family: var(--font-display);
+  font-size: var(--t-label);
+  font-weight: var(--w-bold);
+  letter-spacing: var(--t-label-ls);
+  text-transform: uppercase;
+  color: var(--ink-on-dark-accent);
+}
+
+/* --- foot ----------------------------------------------------------- */
+
+.svc__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-sm);
+  margin-top: var(--s-md);
+  padding-top: var(--s-sm);
+  border-top: var(--rule) solid var(--hairline-dark);
+  font-size: 0.9375rem;
+  color: var(--ink-on-dark-muted);
+}
+
+.svc__foot-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: var(--w-bold);
+  color: var(--ink-on-dark-accent);
+  border-bottom: var(--rule-bold) solid transparent;
+  transition: border-color var(--dur-mid) var(--ease-out-quart);
+}
+
+.svc__foot-link:hover,
+.svc__foot-link:focus-visible {
+  border-bottom-color: var(--surface-accent);
+}
+
+/* At two columns a 2-wide feature cell can never tile evenly against five
+   single cells — it always strands one empty cell. So below this width the
+   farm card returns to a normal cell and keeps its weight from the accent
+   plane, the oversized title and the feature label instead. */
+@media (max-width: 1100px) {
+  .svc__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .svc__card[data-feature='true'] {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+  .svc__card[data-feature='true'] .svc__plate {
+    aspect-ratio: 16 / 10;
+    min-height: 0;
+  }
+  .svc__card[data-feature='true'] .svc__title {
+    font-size: 1.4rem;
+  }
+  .svc__card[data-feature='true'] .svc__copy {
+    font-size: var(--t-body);
+  }
+}
+
+@media (max-width: 760px) {
+  .svc__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .svc__card[data-feature='true'] {
+    grid-column: span 1;
+  }
+  .svc__card[data-feature='true'] .svc__plate {
+    aspect-ratio: 16 / 10;
+  }
+  .svc__plate {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svc__card,
+  .svc__body,
+  .svc__foot-link {
+    transition: none;
+  }
+}

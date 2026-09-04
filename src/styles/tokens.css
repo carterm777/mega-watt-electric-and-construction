@@ -1,0 +1,183 @@
+/* ==========================================================================
+   tokens.css — Mega Watt Electric and Construction
+   The ONLY file in this project allowed to contain a raw colour value.
+
+   Direction: bold-geometric dominant, industrial-utilitarian secondary.
+   Hard-edged colour blocking — arctic ink and frost steel as full-bleed
+   planes, arc-spark orange used as a structural plane rather than an outline.
+   Radius is effectively zero everywhere: separation comes from colour edges,
+   hairlines and space, never from rounded cards or soft shadows.
+   ========================================================================== */
+
+:root {
+  /* ---------------------------------------------------------------- */
+  /* 1. Brand primitives — fixed by the brief, never re-derived        */
+  /* ---------------------------------------------------------------- */
+  --c-arctic-ink: #101820; /* Primary   */
+  --c-frost-steel: #445764; /* Secondary */
+  --c-arc-spark: #e8792e; /* Accent    */
+  --c-void: #0a0f14; /* Dark      */
+  --c-hoarfrost: #eef2f2; /* Light     */
+
+  /* Derived steps — tints, shades and alphas of the five above.       */
+  --c-ink-lift: #1a2530; /* arctic ink, one step up  */
+  --c-ink-edge: #263441; /* hairline on ink surfaces */
+  --c-steel-deep: #35454f; /* frost steel, one step down */
+  --c-steel-lift: #5d7280; /* frost steel, one step up (non-text) */
+  --c-steel-mid: #7c93a2; /* smallest readable step on ink/void: 5.5:1 */
+  --c-steel-pale: #8fa6b4; /* duotone highlight        */
+  --c-hoarfrost-shade: #dde4e5; /* hoarfrost, one step down */
+  --c-hoarfrost-edge: #c8d3d5; /* hairline on light surfaces */
+  --c-spark-deep: #a9490c; /* accent that passes AA on light */
+  --c-spark-lift: #f79950; /* accent, one step up (dark bg only) */
+  --c-white: #ffffff;
+
+  --a-ink-08: rgba(16, 24, 32, 0.08);
+  --a-ink-14: rgba(16, 24, 32, 0.14);
+  --a-ink-24: rgba(16, 24, 32, 0.24);
+  --a-ink-60: rgba(16, 24, 32, 0.6);
+  --a-frost-06: rgba(238, 242, 242, 0.06);
+  --a-frost-10: rgba(238, 242, 242, 0.1);
+  --a-frost-16: rgba(238, 242, 242, 0.16);
+  --a-frost-28: rgba(238, 242, 242, 0.28);
+  --a-frost-70: rgba(238, 242, 242, 0.7);
+  --a-spark-16: rgba(232, 121, 46, 0.16);
+  --a-spark-32: rgba(232, 121, 46, 0.32);
+  --a-void-45: rgba(10, 15, 20, 0.45);
+  --a-void-70: rgba(10, 15, 20, 0.7);
+  --a-void-88: rgba(10, 15, 20, 0.88);
+
+  /* ---------------------------------------------------------------- */
+  /* 2. Semantic surfaces                                              */
+  /* ---------------------------------------------------------------- */
+  --surface-light: var(--c-hoarfrost);
+  --surface-light-raised: var(--c-white);
+  --surface-light-sunk: var(--c-hoarfrost-shade);
+  --surface-ink: var(--c-arctic-ink);
+  --surface-ink-raised: var(--c-ink-lift);
+  --surface-void: var(--c-void);
+  --surface-steel: var(--c-frost-steel);
+  --surface-steel-deep: var(--c-steel-deep);
+  --surface-accent: var(--c-arc-spark);
+
+  /* Ink (type) colours, named by the surface they sit on.             */
+  --ink-on-light: var(--c-arctic-ink);
+  --ink-on-light-muted: var(--c-frost-steel);
+  --ink-on-light-accent: var(--c-spark-deep); /* 5.1:1 on hoarfrost */
+  --ink-on-dark: var(--c-hoarfrost);
+  --ink-on-dark-muted: var(--c-steel-pale);
+  --ink-on-dark-subtle: var(--c-steel-mid); /* 5.5:1 on ink, 6.0:1 on void */
+  --ink-on-dark-accent: var(--c-arc-spark); /* 6.1:1 on arctic ink */
+  --ink-on-steel: var(--c-hoarfrost); /* 6.7:1 on frost steel */
+  --ink-on-steel-muted: rgba(238, 242, 242, 0.78);
+  --ink-on-accent: var(--c-arctic-ink); /* 6.1:1 on arc spark */
+  --ink-on-accent-muted: rgba(16, 24, 32, 0.82); /* 4.6:1 on arc spark */
+
+  --hairline-light: var(--c-hoarfrost-edge);
+  --hairline-dark: var(--c-ink-edge);
+  --hairline-steel: var(--a-frost-28);
+  --hairline-accent: var(--c-arc-spark);
+
+  --focus-ring: var(--c-arc-spark);
+  --focus-ring-light: var(--c-arctic-ink);
+
+  /* Duotone plates — one treatment, applied to every photograph.      */
+  --duo-shadow: var(--c-void);
+  --duo-light: var(--c-steel-pale);
+
+  /* ---------------------------------------------------------------- */
+  /* 3. Type                                                           */
+  /* ---------------------------------------------------------------- */
+  --font-display: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+
+  /* Display steps — tight tracking, tight leading, set very large.    */
+  --t-mega: clamp(1.95rem, 1.1rem + 2.9vw, 3.45rem);
+  --t-mega-lh: 0.94;
+  --t-mega-ls: -0.045em;
+
+  --t-display: clamp(2.1rem, 1.15rem + 4vw, 4rem);
+  --t-display-lh: 0.98;
+  --t-display-ls: -0.038em;
+
+  --t-title: clamp(1.6rem, 1.12rem + 2.05vw, 2.65rem);
+  --t-title-lh: 1.04;
+  --t-title-ls: -0.03em;
+
+  --t-heading: clamp(1.24rem, 1.06rem + 0.78vw, 1.65rem);
+  --t-heading-lh: 1.14;
+  --t-heading-ls: -0.02em;
+
+  --t-lead: clamp(1.02rem, 0.93rem + 0.42vw, 1.28rem);
+  --t-lead-lh: 1.48;
+  --t-lead-ls: -0.006em;
+
+  --t-body: clamp(0.98rem, 0.94rem + 0.16vw, 1.06rem);
+  --t-body-lh: 1.62;
+  --t-body-ls: 0;
+
+  --t-small: 0.875rem;
+  --t-small-lh: 1.5;
+
+  --t-micro: 0.75rem;
+  --t-micro-lh: 1.42;
+
+  /* Machined label — the industrial voice of the page.                */
+  --t-label: 0.6875rem;
+  --t-label-ls: 0.16em;
+  --t-label-lh: 1.1;
+
+  --w-body: 400;
+  --w-medium: 500;
+  --w-semi: 600;
+  --w-bold: 700;
+
+  --measure: 62ch;
+  --measure-tight: 46ch;
+
+  /* ---------------------------------------------------------------- */
+  /* 4. Space, rhythm, structure                                       */
+  /* ---------------------------------------------------------------- */
+  --s-3xs: 0.25rem;
+  --s-2xs: 0.5rem;
+  --s-xs: 0.75rem;
+  --s-sm: 1rem;
+  --s-md: 1.5rem;
+  --s-lg: 2.25rem;
+  --s-xl: 3.25rem;
+  --s-2xl: 4.5rem;
+  --s-3xl: 6.5rem;
+
+  --section-pad-y: clamp(3.5rem, 2rem + 5.4vw, 6.75rem);
+  --section-pad-y-tight: clamp(2.5rem, 1.6rem + 3.4vw, 4.25rem);
+  --gutter: clamp(1.15rem, 0.5rem + 2.4vw, 3rem);
+  --shell: 1320px;
+  --shell-narrow: 1080px;
+
+  /* Hard-edged direction: radius is a rounding error, not a style.    */
+  --r-none: 0;
+  --r-hair: 2px;
+
+  /* Depth is used exactly where the direction allows it — the console */
+  /* and nothing else. Everything else separates by colour edge.       */
+  --shadow-console: 0 32px 64px -28px rgba(10, 15, 20, 0.72);
+  --shadow-console-lift: 0 40px 78px -30px rgba(10, 15, 20, 0.82);
+
+  --rule: 1px;
+  --rule-bold: 2px;
+  --plane: 8px; /* the structural accent plane thickness */
+
+  --grid-pitch: 88px;
+  --grid-pitch-sm: 52px;
+
+  --ease-out-cubic: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --dur-fast: 180ms;
+  --dur-mid: 260ms;
+  --dur-slow: 420ms;
+
+  --z-console: 5;
+  --z-header: 60;
+  --z-dropdown: 70;
+  --z-callbar: 80;
+}

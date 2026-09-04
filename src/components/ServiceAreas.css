@@ -1,0 +1,304 @@
+/* ==========================================================================
+   Service Area — Interactive Location Finder (layouts/location)
+                  + Industrial Grid Coverage Map (visual-styles/location)
+   Hand-built. No embed, no tiles, no API. The diagram is deliberately abstract
+   and labelled as a schematic so it never misrepresents real geography.
+   ========================================================================== */
+
+.cov__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 0.4rem + 3vw, 3.5rem);
+  align-items: start;
+}
+
+.cov__copy {
+  display: grid;
+  gap: var(--s-sm);
+}
+
+.cov__eyebrow {
+  color: var(--ink-on-light-accent);
+}
+
+.cov__title {
+  max-width: 14ch;
+}
+
+.cov__lead {
+  font-size: var(--t-lead);
+  line-height: var(--t-lead-lh);
+  max-width: 52ch;
+}
+
+.cov__served {
+  padding-left: var(--s-sm);
+  border-left: var(--plane) solid var(--surface-accent);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--ink-on-light-muted);
+  max-width: 50ch;
+}
+
+/* --- finder ---------------------------------------------------------- */
+
+.cov__finder {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: var(--s-2xs);
+  padding-top: var(--s-sm);
+  border-top: var(--rule) solid var(--hairline-light);
+}
+
+.cov__label {
+  font-family: var(--font-display);
+  font-size: var(--t-label);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--t-label-ls);
+  text-transform: uppercase;
+  color: var(--ink-on-light-muted);
+}
+
+.cov__field {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.65rem 0.8rem;
+  background: var(--surface-light-raised);
+  border: var(--rule) solid var(--hairline-light);
+  border-bottom: var(--rule-bold) solid var(--ink-on-light);
+  transition: border-color var(--dur-fast) var(--ease-out-cubic);
+}
+
+.cov__field:focus-within {
+  border-bottom-color: var(--surface-accent);
+}
+
+.cov__field-icon {
+  flex: none;
+  color: var(--ink-on-light-muted);
+}
+
+.cov__input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--ink-on-light);
+}
+
+.cov__input:focus {
+  outline: none;
+}
+
+.cov__input:focus-visible {
+  outline: 2px solid var(--focus-ring-light);
+  outline-offset: 3px;
+}
+
+.cov__hint {
+  font-size: var(--t-micro);
+  color: var(--ink-on-light-muted);
+}
+
+.cov__index {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 0.25rem;
+  background: var(--hairline-light);
+  border: var(--rule) solid var(--hairline-light);
+}
+
+.cov__town {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.55rem 0.7rem;
+  background: var(--surface-light-raised);
+}
+
+/* The rural catch-all closes the index across both columns so the plate ends
+   square instead of leaving a dead cell. */
+.cov__town[data-kind='Rural'] {
+  grid-column: 1 / -1;
+}
+
+.cov__town[data-kind='Base'] {
+  background: var(--surface-ink);
+  color: var(--ink-on-dark);
+}
+
+.cov__town-name {
+  font-family: var(--font-display);
+  font-size: 0.84375rem;
+  font-weight: var(--w-medium);
+  letter-spacing: -0.012em;
+}
+
+.cov__town-kind {
+  font-size: 0.5625rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-on-light-muted);
+}
+
+.cov__town[data-kind='Base'] .cov__town-kind {
+  color: var(--ink-on-dark-accent);
+}
+
+.cov__empty {
+  display: grid;
+  gap: 0.6rem;
+  justify-items: start;
+  padding: var(--s-sm);
+  background: var(--surface-ink);
+  border-left: var(--plane) solid var(--surface-accent);
+  color: var(--ink-on-dark);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.cov__empty-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-display);
+  font-weight: var(--w-bold);
+  color: var(--ink-on-dark-accent);
+  border-bottom: var(--rule-bold) solid var(--surface-accent);
+}
+
+/* --- schematic ------------------------------------------------------- */
+
+.cov__schematic {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.cov__plate {
+  position: relative;
+  isolation: isolate;
+  aspect-ratio: 1 / 1;
+  background: var(--surface-ink);
+  border-top: var(--plane) solid var(--surface-accent);
+  overflow: hidden;
+}
+
+.cov__plate-grid {
+  z-index: 0;
+}
+
+.cov__svg {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding: 4%;
+}
+
+.cov__run {
+  stroke: var(--c-steel-lift);
+  stroke-width: 0.4;
+  transition: stroke var(--dur-mid) var(--ease-out-cubic);
+}
+
+.cov__run[data-on='true'] {
+  stroke: var(--surface-accent);
+}
+
+.cov__node-box {
+  fill: var(--surface-void);
+  stroke: var(--c-steel-lift);
+  stroke-width: 0.5;
+  transition:
+    fill var(--dur-mid) var(--ease-out-cubic),
+    stroke var(--dur-mid) var(--ease-out-cubic);
+}
+
+.cov__node-text {
+  fill: var(--ink-on-dark-muted);
+  font-family: var(--font-display);
+  font-size: 2.5px;
+  font-weight: 500;
+  letter-spacing: 0.06px;
+  text-anchor: middle;
+  transition: fill var(--dur-mid) var(--ease-out-cubic);
+}
+
+.cov__node[data-on='true'] .cov__node-box {
+  fill: var(--surface-accent);
+  stroke: var(--surface-accent);
+}
+
+.cov__node[data-on='true'] .cov__node-text {
+  fill: var(--ink-on-dark);
+}
+
+.cov__node[data-hub='true'] .cov__node-box {
+  fill: var(--surface-accent);
+  stroke: var(--surface-accent);
+}
+
+.cov__node[data-hub='true'] .cov__node-text {
+  fill: var(--ink-on-dark);
+  font-weight: 700;
+  font-size: 3.1px;
+}
+
+.cov__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-xs) var(--s-sm);
+  margin-top: var(--s-2xs);
+  padding-top: var(--s-sm);
+  border-top: var(--rule) solid var(--hairline-light);
+}
+
+.cov__cta-lead {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: var(--w-bold);
+  letter-spacing: -0.02em;
+  color: var(--ink-on-light);
+}
+
+.cov__note {
+  font-size: var(--t-micro);
+  letter-spacing: 0.05em;
+  color: var(--ink-on-light-muted);
+}
+
+@media (max-width: 940px) {
+  .cov__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cov__plate {
+    aspect-ratio: 4 / 3;
+  }
+  .cov__node-text {
+    font-size: 2.9px;
+  }
+}
+
+@media (max-width: 520px) {
+  .cov__index {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cov__plate {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cov__run,
+  .cov__node-box,
+  .cov__node-text,
+  .cov__field {
+    transition: none;
+  }
+}

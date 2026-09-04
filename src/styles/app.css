@@ -1,0 +1,354 @@
+/* ==========================================================================
+   app.css — page scaffolding and the patterns shared across sections.
+   Per-section rules live in src/components/<Name>.css.
+
+   Specificity discipline: every selector below is a SINGLE class. Bare element
+   and attribute selectors are wrapped in :where() so they score zero.
+   No !important anywhere.
+   ========================================================================== */
+
+body {
+  background: var(--surface-light);
+  color: var(--ink-on-light);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  line-height: var(--t-body-lh);
+  font-weight: var(--w-body);
+}
+
+/* ---------------------------------------------------------------- */
+/* Shell + section scaffolding                                       */
+/* ---------------------------------------------------------------- */
+
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.shell--narrow {
+  max-width: var(--shell-narrow);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--section-pad-y);
+}
+
+/* Anchor targets have to clear the sticky header, or the nav jump lands with
+   the section heading hidden underneath it. */
+:where(#top, #reviews, #why, #services, #coverage, #story, #cta, #faq, #footer) {
+  scroll-margin-top: 116px;
+}
+
+.section--tight {
+  padding-block: var(--section-pad-y-tight);
+}
+
+.section--flush {
+  padding-block: 0;
+}
+
+/* Colour fields. Hard edges only — no gradients between sections. */
+.field-light {
+  background: var(--surface-light);
+  color: var(--ink-on-light);
+}
+
+.field-ink {
+  background: var(--surface-ink);
+  color: var(--ink-on-dark);
+}
+
+.field-void {
+  background: var(--surface-void);
+  color: var(--ink-on-dark);
+}
+
+.field-steel {
+  background: var(--surface-steel);
+  color: var(--ink-on-steel);
+}
+
+.field-accent {
+  background: var(--surface-accent);
+  color: var(--ink-on-accent);
+}
+
+/* The structural accent plane: a hard 8px band, never a border, never a
+   gradient. This is the page's connective tissue between colour fields. */
+.plane-top {
+  border-top: var(--plane) solid var(--surface-accent);
+}
+
+.plane-bottom {
+  border-bottom: var(--plane) solid var(--surface-accent);
+}
+
+/* ---------------------------------------------------------------- */
+/* Raw industrial grid overlay                                       */
+/* ---------------------------------------------------------------- */
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--a-frost-06) var(--rule), transparent var(--rule)),
+    linear-gradient(to bottom, var(--a-frost-06) var(--rule), transparent var(--rule));
+  background-size: var(--grid-pitch) var(--grid-pitch);
+}
+
+.grid-overlay--dense {
+  background-size: var(--grid-pitch-sm) var(--grid-pitch-sm);
+}
+
+.grid-overlay--light {
+  background-image:
+    linear-gradient(to right, var(--a-ink-08) var(--rule), transparent var(--rule)),
+    linear-gradient(to bottom, var(--a-ink-08) var(--rule), transparent var(--rule));
+}
+
+/* ---------------------------------------------------------------- */
+/* Type patterns                                                     */
+/* ---------------------------------------------------------------- */
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2xs);
+  font-family: var(--font-display);
+  font-size: var(--t-label);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--t-label-ls);
+  line-height: var(--t-label-lh);
+  text-transform: uppercase;
+}
+
+.label__tick {
+  display: block;
+  width: 22px;
+  height: var(--rule-bold);
+  background: var(--surface-accent);
+}
+
+.section-head {
+  display: grid;
+  gap: var(--s-sm);
+  margin-bottom: var(--s-xl);
+}
+
+.section-head__title {
+  font-family: var(--font-display);
+  font-size: var(--t-display);
+  line-height: var(--t-display-lh);
+  letter-spacing: var(--t-display-ls);
+  font-weight: var(--w-bold);
+  max-width: 16ch;
+  text-wrap: balance;
+}
+
+.section-head__lead {
+  font-size: var(--t-lead);
+  line-height: var(--t-lead-lh);
+  max-width: var(--measure);
+}
+
+.h3 {
+  font-family: var(--font-display);
+  font-size: var(--t-heading);
+  line-height: var(--t-heading-lh);
+  letter-spacing: var(--t-heading-ls);
+  font-weight: var(--w-bold);
+}
+
+/* ---------------------------------------------------------------- */
+/* Buttons — hard-edged blocks with a real resting-state interaction */
+/* ---------------------------------------------------------------- */
+
+.btn {
+  --btn-fill: var(--surface-accent);
+  --btn-ink: var(--ink-on-accent);
+  --btn-edge: var(--surface-accent);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2xs);
+  padding: 0.9rem 1.4rem;
+  border: var(--rule-bold) solid var(--btn-edge);
+  border-radius: var(--r-none);
+  background: var(--btn-fill);
+  color: var(--btn-ink);
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: var(--w-bold);
+  letter-spacing: -0.012em;
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+  transition:
+    background-color var(--dur-mid) var(--ease-out-cubic),
+    color var(--dur-mid) var(--ease-out-cubic),
+    border-color var(--dur-mid) var(--ease-out-cubic),
+    transform var(--dur-mid) var(--ease-out-cubic);
+}
+
+/* Wipe fill — the accent arriving as a plane, not a colour fade. */
+.btn__wipe {
+  position: absolute;
+  inset: 0;
+  background: var(--btn-ink);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur-slow) var(--ease-out-quart);
+}
+
+.btn__inner {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2xs);
+  z-index: 1;
+}
+
+.btn:hover .btn__wipe,
+.btn:focus-visible .btn__wipe {
+  transform: scaleX(1);
+}
+
+.btn:hover,
+.btn:focus-visible {
+  color: var(--btn-fill);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn--ghost-dark {
+  --btn-fill: transparent;
+  --btn-ink: var(--ink-on-dark);
+  --btn-edge: var(--a-frost-28);
+}
+
+.btn--ghost-dark:hover,
+.btn--ghost-dark:focus-visible {
+  --btn-edge: var(--ink-on-dark);
+  color: var(--surface-ink);
+}
+
+.btn--ghost-light {
+  --btn-fill: transparent;
+  --btn-ink: var(--ink-on-light);
+  --btn-edge: var(--ink-on-light);
+}
+
+.btn--ghost-light:hover,
+.btn--ghost-light:focus-visible {
+  color: var(--surface-light);
+}
+
+.btn--ink {
+  --btn-fill: var(--surface-ink);
+  --btn-ink: var(--ink-on-dark);
+  --btn-edge: var(--surface-ink);
+}
+
+.btn--ink:hover,
+.btn--ink:focus-visible {
+  color: var(--surface-ink);
+}
+
+.btn--wide {
+  width: 100%;
+}
+
+.btn--lg {
+  padding: 1.05rem 1.85rem;
+  font-size: 1.0625rem;
+}
+
+.btn__icon {
+  flex: none;
+}
+
+/* ---------------------------------------------------------------- */
+/* Duotone plate — ONE treatment, applied to every photograph.       */
+/* ---------------------------------------------------------------- */
+
+.duo {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--duo-shadow);
+}
+
+.duo__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.12) brightness(1.04);
+  mix-blend-mode: screen;
+  transition: transform 700ms var(--ease-out-quart);
+}
+
+.duo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--duo-light);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.duo--zoom:hover .duo__img,
+.duo--zoom:focus-within .duo__img {
+  transform: scale(1.045);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .duo__img {
+    transition: none;
+  }
+  .duo--zoom:hover .duo__img,
+  .duo--zoom:focus-within .duo__img {
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* Utility                                                           */
+/* ---------------------------------------------------------------- */
+
+.stack {
+  display: grid;
+  align-content: start;
+}
+
+.hairline-dark {
+  border-top: var(--rule) solid var(--hairline-dark);
+}
+
+.hairline-light {
+  border-top: var(--rule) solid var(--hairline-light);
+}
+
+.skip-link {
+  background: var(--surface-accent);
+  color: var(--ink-on-accent);
+  font-family: var(--font-display);
+  font-weight: var(--w-bold);
+}
+
+.page {
+  position: relative;
+}
+
+/* Leaves room for the sticky mobile call bar so it never covers the footer. */
+@media (max-width: 900px) {
+  .page {
+    padding-bottom: 62px;
+  }
+}
